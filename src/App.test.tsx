@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from './App';
+import { generateImage } from 'jsdom-screenshot';
 
-test('renders learn react link', () => {
+it('has no visual regressions', async () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const screenshot = await generateImage();
+  expect(screenshot).toMatchImageSnapshot();
 });
